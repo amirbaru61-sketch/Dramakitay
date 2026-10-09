@@ -1,25 +1,32 @@
-package com.dramakita.ui.theme
+package com.dramakita
 
-import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.dramakita.data.DramaRepository
+import com.dramakita.ui.theme.DramaKitaTheme
 
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Medium,
-        fontSize = 16.sp
-    ),
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp
-    ),
-    labelLarge = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 14.sp
-    )
-)
+@Composable
+fun DramaKitaApp() {
+    val viewModel: MainViewModel = viewModel()
+    val dramas = DramaRepository.getAllDramas()
+    val favoriteIds by viewModel.favoriteIds.collectAsState()
+
+    DramaKitaTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            AppContent(
+                dramas = dramas,
+                favoriteIds = favoriteIds,
+                onToggleFavorite = viewModel::toggleFavorite
+            )
+        }
+    }
+}

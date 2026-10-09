@@ -18,12 +18,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -49,9 +49,7 @@ fun PosterCard(
         shape = RoundedCornerShape(22.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFF1B1B23))
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
+        Box(modifier = Modifier.fillMaxSize()) {
             AsyncImage(
                 model = drama.posterUrl,
                 contentDescription = drama.title,
@@ -65,10 +63,7 @@ fun PosterCard(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(10.dp)
-                    .background(
-                        color = Color(0x99000000),
-                        shape = RoundedCornerShape(50)
-                    )
+                    .background(Color(0x99000000), RoundedCornerShape(50.dp))
             ) {
                 IconButton(
                     onClick = onToggleFavorite,
@@ -87,7 +82,7 @@ fun PosterCard(
                     .align(Alignment.BottomStart)
                     .fillMaxWidth()
                     .background(
-                        brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                        brush = Brush.verticalGradient(
                             colors = listOf(Color.Transparent, Color(0xCC000000))
                         )
                     )

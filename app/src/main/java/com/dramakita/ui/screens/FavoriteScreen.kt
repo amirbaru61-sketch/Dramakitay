@@ -41,10 +41,7 @@ fun SearchScreen(
     onToggleFavorite: (Int) -> Unit
 ) {
     var query by remember { mutableStateOf("") }
-
-    val results = dramas.filter {
-        it.title.contains(query, ignoreCase = true)
-    }
+    val results = dramas.filter { it.title.contains(query, ignoreCase = true) }
 
     Column(
         modifier = Modifier
@@ -52,10 +49,7 @@ fun SearchScreen(
             .background(Color(0xFF0D0D12))
             .padding(16.dp)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
-        ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             IconButton(onClick = onBack) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Kembali", tint = Color.White)
             }
